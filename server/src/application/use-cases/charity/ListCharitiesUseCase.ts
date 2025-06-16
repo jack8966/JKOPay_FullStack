@@ -10,7 +10,7 @@ export interface ListCharitiesDTO {
 }
 
 export interface ListCharitiesResponse {
-  charities: Array<{
+  data: Array<{
     id: number;
     name: string;
     description: string;
@@ -34,7 +34,7 @@ export class ListCharitiesUseCase {
     const hasMore = total > dto.page * dto.limit;
 
     return {
-      charities: charities.map((charity) => ({
+      data: charities.map((charity) => ({
         id: charity.getId(),
         name: charity.getName().getValue(),
         description: charity.getDescription().getValue(),
