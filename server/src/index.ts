@@ -7,15 +7,6 @@ import { loggerMiddleware } from './presentation/middlewares/loggerMiddleware';
 import { errorHandlerMiddleware } from './presentation/middlewares/errorHandlerMiddleware';
 import { securityMiddleware } from './presentation/middlewares/securityMiddleware';
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-// Apply security middleware
-app.use(securityMiddleware);
-
-app.use(express.json({ limit: '10kb' })); // Limit body size
-app.use(loggerMiddleware);
-
 // Initialize TypeORM
 AppDataSource.initialize()
   .then(() => {
@@ -25,6 +16,15 @@ AppDataSource.initialize()
     logger.error('Error during Data Source initialization:', error);
     throw error;
   });
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Apply security middleware
+app.use(securityMiddleware);
+
+app.use(express.json({ limit: '10kb' })); // Limit body size
+app.use(loggerMiddleware);
 
 // Routes
 app.use('/api/charities', charityRoutes);
