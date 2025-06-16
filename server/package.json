@@ -12,10 +12,10 @@
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "migration:show:dev": "dotenv -e .env.development -- npm run typeorm migration:show -- -d src/infrastructure/database/typeorm.config.ts",
     "migration:run:dev": "dotenv -e .env.development -- npm run typeorm migration:run -- -d src/infrastructure/database/typeorm.config.ts",
-    "migration:revert:dev": "dotenv -e .env.development -- npm run typeorm migration:revert -d src/infrastructure/database/typeorm.config.ts",
+    "migration:revert:dev": "dotenv -e .env.development -- npm run typeorm migration:revert -- -d src/infrastructure/database/typeorm.config.ts",
     "migration:show:prod": "dotenv -e .env.production -- npm run typeorm migration:show -- -d src/infrastructure/database/typeorm.config.ts",
-    "migration:run:prod": "dotenv -e .env.production -- npm run typeorm migration:run -d src/infrastructure/database/typeorm.config.ts",
-    "migration:revert:prod": "dotenv -e .env.production -- npm run typeorm migration:revert -d src/infrastructure/database/typeorm.config.ts",
+    "migration:run:prod": "dotenv -e .env.production -- npm run typeorm migration:run -- -d src/infrastructure/database/typeorm.config.ts",
+    "migration:revert:prod": "dotenv -e .env.production -- npm run typeorm migration:revert -- -d src/infrastructure/database/typeorm.config.ts",
     "seed:dev": "dotenv -e .env.development -- ts-node src/scripts/seed.ts",
     "seed:prod": "dotenv -e .env.production -- ts-node src/scripts/seed.ts"
   },
