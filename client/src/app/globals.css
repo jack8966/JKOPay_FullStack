@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #C9191D;
+  --color-secondary: #D63F3C;
+  --color-background: #F4F4F6;
+  --color-background-secondary: #EDEDF1;
+  --font-display: "PingFang TC", "Arial", sans-serif;
+}
+
+.bottom-bar {
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  padding: 16px 0 12px 0;
+}
