@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AppDataSource } from '../infrastructure/database/typeorm.config';
-import { Charity } from '../domain/entities/Charity';
+import { Charity } from '../domain/entities/Charity.entity';
 import { CharityName } from '../domain/value-objects/CharityName';
 import { CharityDescription } from '../domain/value-objects/CharityDescription';
 import { CharityImageUrl } from '../domain/value-objects/CharityImageUrl';

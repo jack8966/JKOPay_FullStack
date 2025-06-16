@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { Charity } from '../../domain/entities/Charity';
+import { Charity } from '../../domain/entities/Charity.entity';
 import {
   CharityQueryParams,
   ICharityRepository,

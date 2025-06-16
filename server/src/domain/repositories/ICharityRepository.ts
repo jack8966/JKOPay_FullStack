@@ -1,4 +1,4 @@
-import { Charity } from '../entities/Charity';
+import { Charity } from '../entities/Charity.entity';
 
 export interface CharityQueryParams {
   name?: string;
