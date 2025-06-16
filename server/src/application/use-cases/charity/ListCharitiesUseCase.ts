@@ -40,6 +40,7 @@ export class ListCharitiesUseCase {
         description: charity.getDescription().getValue(),
         createdAt: charity.getCreatedAt(),
         updatedAt: charity.getUpdatedAt(),
+        imageUrl: charity.getImageUrl().getValue(),
       })),
       total,
       hasMore,
