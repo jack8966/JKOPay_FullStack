@@ -18,6 +18,8 @@ export interface LoggingConfig {
 
 export interface SecurityConfig {
   allowedOrigins: string[];
+  rateLimitWindowMs: string;
+  rateLimitMax: string;
 }
 
 // Root configuration type
@@ -46,5 +48,7 @@ export interface EnvMapping {
   };
   security: {
     allowedOrigins: string;
+    rateLimitWindowMs: string;
+    rateLimitMax: string;
   };
 }

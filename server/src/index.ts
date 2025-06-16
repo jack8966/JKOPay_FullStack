@@ -6,8 +6,6 @@ import charityRoutes from './presentation/routes/charityRoutes';
 import { loggerMiddleware } from './presentation/middlewares/loggerMiddleware';
 import { errorHandlerMiddleware } from './presentation/middlewares/errorHandlerMiddleware';
 import { securityMiddleware } from './presentation/middlewares/securityMiddleware';
-import { rateLimit } from 'express-rate-limit';
-import { config as appConfig } from './infrastructure/config/AppConfig';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -27,16 +25,6 @@ AppDataSource.initialize()
     logger.error('Error during Data Source initialization:', error);
     throw error;
   });
-
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: appConfig.getEnvByPath('server.rateLimitWindowMs'),
-  limit: appConfig.getEnvByPath('server.rateLimitMax'),
-  standardHeaders: 'draft-8',
-  legacyHeaders: false,
-});
-
-app.use(limiter);
 
 // Routes
 app.use('/api/charities', charityRoutes);
