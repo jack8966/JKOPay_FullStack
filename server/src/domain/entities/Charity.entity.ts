@@ -23,6 +23,9 @@ export class Charity {
   @Column({ type: 'varchar', name: 'image_url', nullable: true })
   public imageUrl: string;
 
+  @Column({ type: 'boolean', name: 'valid_flag', default: true })
+  public validFlag: boolean;
+
   @CreateDateColumn()
   private createdAt: Date;
 
@@ -46,6 +49,10 @@ export class Charity {
     return new CharityImageUrl(this.imageUrl);
   }
 
+  getValidFlag(): boolean {
+    return this.validFlag;
+  }
+
   getCreatedAt(): Date {
     return this.createdAt;
   }
@@ -60,6 +67,7 @@ export class Charity {
       name: this.name,
       description: this.description,
       imageUrl: this.imageUrl,
+      validFlag: this.validFlag,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

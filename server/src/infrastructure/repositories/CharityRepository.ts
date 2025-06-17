@@ -1,10 +1,10 @@
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
+import { AppDataSource } from '../database/typeorm.config';
 import { Charity } from '../../domain/entities/Charity.entity';
 import {
   CharityQueryParams,
   ICharityRepository,
 } from '../../domain/repositories/ICharityRepository';
-import { AppDataSource } from '../database/typeorm.config';
 
 export class CharityRepository implements ICharityRepository {
   private repository: Repository<Charity>;
@@ -14,7 +14,11 @@ export class CharityRepository implements ICharityRepository {
   }
 
   async findById(id: number): Promise<Charity | null> {
-    return this.repository.findOneBy({ id: id });
+    return this.repository.findOneBy({ id, validFlag: true });
+  }
+
+  async findByIds(ids: number[]): Promise<Charity[]> {
+    return this.repository.findBy({ id: In(ids), validFlag: true });
   }
 
   async findAll(
@@ -25,8 +29,10 @@ export class CharityRepository implements ICharityRepository {
     const skip = (page - 1) * limit;
     const queryBuilder = this.repository.createQueryBuilder('charity');
 
+    queryBuilder.where('charity.validFlag = :validFlag', { validFlag: true });
+
     if (queryParams?.name) {
-      queryBuilder.where('charity.name LIKE :name', { name: `%${queryParams.name}%` });
+      queryBuilder.andWhere('charity.name LIKE :name', { name: `%${queryParams.name}%` });
     }
 
     if (queryParams?.orderBy) {
@@ -40,15 +46,44 @@ export class CharityRepository implements ICharityRepository {
     return { charities, total };
   }
 
-  async save(charity: Charity): Promise<Charity> {
+  async create(charityData: Partial<Charity>): Promise<Charity> {
+    const charity = this.repository.create({ ...charityData, validFlag: true });
     return this.repository.save(charity);
   }
 
-  async update(charity: Charity): Promise<Charity> {
-    return this.repository.save(charity);
+  async createMany(charitiesData: Partial<Charity>[]): Promise<Charity[]> {
+    const charities = charitiesData.map((data) =>
+      this.repository.create({ ...data, validFlag: true }),
+    );
+    return this.repository.save(charities);
   }
 
-  async delete(id: number): Promise<void> {
-    await this.repository.delete(id);
+  async update(id: number, charityData: Partial<Charity>): Promise<Charity | null> {
+    await this.repository.update(id, charityData);
+    return this.findById(id);
+  }
+
+  async updateMany(charities: { id: number; data: Partial<Charity> }[]): Promise<Charity[]> {
+    const updatedCharities: Charity[] = [];
+
+    for (const { id, data } of charities) {
+      await this.repository.update(id, data);
+      const updated = await this.findById(id);
+      if (updated) {
+        updatedCharities.push(updated);
+      }
+    }
+
+    return updatedCharities;
+  }
+
+  async delete(id: number): Promise<boolean> {
+    const result = await this.repository.update(id, { validFlag: false });
+    return result.affected ? result.affected > 0 : false;
+  }
+
+  async deleteMany(ids: number[]): Promise<boolean> {
+    const result = await this.repository.update({ id: In(ids) }, { validFlag: false });
+    return result.affected ? result.affected > 0 : false;
   }
 }

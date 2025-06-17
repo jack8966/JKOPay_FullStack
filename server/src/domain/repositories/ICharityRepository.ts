@@ -12,12 +12,16 @@ export interface CharityQueryParams {
 
 export interface ICharityRepository {
   findById(id: number): Promise<Charity | null>;
+  findByIds(ids: number[]): Promise<Charity[]>;
   findAll(
     page: number,
     limit: number,
     queryParams?: CharityQueryParams,
   ): Promise<{ charities: Charity[]; total: number }>;
-  save(charity: Charity): Promise<Charity>;
-  update(charity: Charity): Promise<Charity>;
-  delete(id: number): Promise<void>;
+  create(charity: Partial<Charity>): Promise<Charity>;
+  createMany(charities: Partial<Charity>[]): Promise<Charity[]>;
+  update(id: number, charity: Partial<Charity>): Promise<Charity | null>;
+  updateMany(charities: { id: number; data: Partial<Charity> }[]): Promise<Charity[]>;
+  delete(id: number): Promise<boolean>;
+  deleteMany(ids: number[]): Promise<boolean>;
 }
