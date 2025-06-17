@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import NoDataImage from "@/public/no-data.png";
 
 interface NoDataHandlerProps {
   data: unknown[];
@@ -16,7 +17,7 @@ export default function NoDataHandler({
     return (
       <div className="top-[210px] absolute left-1/2 -translate-x-1/2 flex flex-col items-center">
         <Image
-          src="/no-data.png"
+          src={NoDataImage}
           alt="no data"
           width={144}
           height={144}

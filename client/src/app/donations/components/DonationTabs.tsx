@@ -8,6 +8,7 @@ import ProjectsList from "./ProjectsList";
 import ProductsList from "./ProductsList";
 import { Charity } from "./CharitiesList";
 import { ListApiResponse } from "@/app/api/donations/route";
+import LoadingImage from "@/public/loading.svg";
 
 const tabs = [
   { key: "charities", label: "公益團體" },
@@ -223,7 +224,7 @@ export default function DonationTabs() {
       {isLoading && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <Image
-            src="/loading.svg"
+            src={LoadingImage}
             alt="loading"
             width={22}
             height={22}
