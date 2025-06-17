@@ -17,7 +17,8 @@
     "migration:run:prod": "dotenv -e .env.production -- npm run typeorm migration:run -- -d src/infrastructure/database/typeorm.config.ts",
     "migration:revert:prod": "dotenv -e .env.production -- npm run typeorm migration:revert -- -d src/infrastructure/database/typeorm.config.ts",
     "seed:dev": "dotenv -e .env.development -- ts-node src/scripts/seed.ts",
-    "seed:prod": "dotenv -e .env.production -- ts-node src/scripts/seed.ts"
+    "seed:prod": "dotenv -e .env.production -- ts-node src/scripts/seed.ts",
+    "generate:swagger": "ts-node src/scripts/generate-swagger.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,8 @@
   "dependencies": {
     "@types/helmet": "^0.0.48",
     "@types/hpp": "^0.2.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "cors": "^2.8.5",
     "express": "^4.18.3",
     "express-rate-limit": "^7.5.0",
@@ -34,6 +37,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.16.0",
     "reflect-metadata": "^0.2.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.24",
     "winston": "^3.17.0"
   },
