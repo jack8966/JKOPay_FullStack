@@ -2,10 +2,10 @@
 
 這是一個使用 Next.js 和 Node.js 開發的全端專案，包含前端和後端兩個部分。
 
-## Live Demo
+## Introduction
 
-[Live Demo](https://jkopay-fullstack-client-261573009903.asia-east1.run.app/donations)
-[Github Repo](https://github.com/jack8966/JKOPay_FullStack)
+- [Live Demo](https://jkopay-fullstack-client-261573009903.asia-east1.run.app/donations)
+- [Github Repo](https://github.com/jack8966/JKOPay_FullStack)
 
 ## 專案結構
 
@@ -34,15 +34,15 @@
 使用的是 GCP Cloud Build 綁定 [Github repo](https://github.com/jack8966/JKOPay_FullStack) 並觸發部署流程。
 並且透過 GCP Secret Manager 注入 Production env variables。
 
-### 使用 Docker 開發（可選）
+### 使用 Docker 開發
 
-1. 啟動開發環境，環境變數參考 server/.env.development：
+1. 進入後端目錄
 
 ```bash
-docker-compose up -d
+cd server
 ```
 
-2. 運行資料庫遷移：
+2. 執行資料庫遷移：
 
 ```bash
 npm run migration:show:dev
@@ -53,6 +53,12 @@ npm run migration:run:dev
 
 ```bash
 npm run seed:dev
+```
+
+4. 啟動開發環境 (環境變數預設參考 .env.development)：
+
+```bash
+docker-compose up -d
 ```
 
 4. 後端 API 將在 http://localhost:3000 運行，API 文件可在 `/api-docs` 路徑查看。
