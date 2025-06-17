@@ -1,7 +1,9 @@
+"use client";
+
+import { ListApiResponse } from "@/app/api/donations/route";
 import NoDataHandler from "@/components/noDataHandler";
 import Image from "next/image";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { ListApiResponse } from "../page";
 
 export interface Charity {
   id: number;
@@ -10,17 +12,17 @@ export interface Charity {
   imageUrl: string;
 }
 
-interface CharitiesPageProps {
+interface CharitiesListProps {
   listData: ListApiResponse<Charity>;
   alreadyFetched: boolean;
   fetchMoreCallback: () => Promise<void>;
 }
 
-export default function CharitiesPage({
+export default function CharitiesList({
   listData,
   alreadyFetched,
   fetchMoreCallback,
-}: CharitiesPageProps) {
+}: CharitiesListProps) {
   const charities = listData.data;
 
   return (
@@ -62,28 +64,6 @@ export default function CharitiesPage({
             </div>
           ))}
         </InfiniteScroll>
-
-        {/* {charities.map((charity) => (
-          <div
-            className="flex flex-row items-center p-3 text-[16px] rounded-xl bg-white hover:bg-gray-50 cursor-pointer"
-            key={charity.id}
-          >
-            <div className="w-[64px] h-[64px] border border-gray-200 rounded-md mr-3">
-              <Image
-                src={charity.imageUrl}
-                alt={charity.name}
-                width={64}
-                height={64}
-              />
-            </div>
-            <div className="flex-1 h-full flex flex-col justify-center">
-              <div className="font-medium text-[16px]/6">{charity.name}</div>
-              <div className="text-gray-500 text-[13px]/5 line-clamp-2">
-                {charity.description}
-              </div>
-            </div>
-          </div>
-        ))} */}
       </div>
     </NoDataHandler>
   );
