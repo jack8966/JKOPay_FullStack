@@ -22,6 +22,6 @@ export interface ICharityRepository {
   createMany(charities: Partial<Charity>[]): Promise<Charity[]>;
   update(id: number, charity: Partial<Charity>): Promise<Charity | null>;
   updateMany(charities: { id: number; data: Partial<Charity> }[]): Promise<Charity[]>;
-  delete(id: number): Promise<boolean>;
+  delete(id: number): Promise<Charity | null>;
   deleteMany(ids: number[]): Promise<boolean>;
 }

@@ -81,8 +81,8 @@ export class CharityController {
   async delete(req: Request, res: Response): Promise<void> {
     try {
       const id = parseInt(req.params.id);
-      const success = await this.deleteCharityUseCase.execute(id);
-      if (!success) {
+      const deletedCharity = await this.deleteCharityUseCase.execute(id);
+      if (!deletedCharity) {
         res.status(404).json({ error: 'Charity not found' });
         return;
       }

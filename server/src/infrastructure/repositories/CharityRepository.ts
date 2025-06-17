@@ -77,9 +77,9 @@ export class CharityRepository implements ICharityRepository {
     return updatedCharities;
   }
 
-  async delete(id: number): Promise<boolean> {
-    const result = await this.repository.update(id, { validFlag: false });
-    return result.affected ? result.affected > 0 : false;
+  async delete(id: number): Promise<Charity | null> {
+    await this.repository.update(id, { validFlag: false });
+    return this.findById(id);
   }
 
   async deleteMany(ids: number[]): Promise<boolean> {

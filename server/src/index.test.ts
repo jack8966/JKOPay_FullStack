@@ -13,10 +13,19 @@ describe('Express Application', () => {
     // Mock database connection
     jest.spyOn(AppDataSource, 'initialize').mockResolvedValue(AppDataSource);
 
+    // Initialize database connection
+    await AppDataSource.initialize();
+
     app = express();
     app.use(securityMiddleware);
     app.use(express.json({ limit: '10kb' }));
     app.use(loggerMiddleware);
+
+    // Add health check endpoint
+    app.get('/health', (req, res) => {
+      res.status(200).json({ status: 'ok' });
+    });
+
     app.use('/api/charities', charityRoutes);
     app.use(errorHandlerMiddleware);
   });
